@@ -27,14 +27,22 @@ variable "aws_rt_name" {
   default = "Test-rt"
 }
 
-# Provide ami-string while planning, applying, and destroying
+# you can Provide ami-string while planning, applying, and destroying
 # ----> $ terraform plan -var "ami-string=<the-actual-ami>"
-variable "ami-string" {
+variable "image_id" {
   type = string
+  description = "This is the ID of the Amazon Machine Image (AMI) that is used for the server"
   default = "ami-0ec7f9846da6b0f61"
+
+  validation {
+    condition = length(var.image_id) > 4 && substr(var.image_id, 0, 4) == "ami-"
+    error_message = "The ID must have a valid AMI starting with <ami->"
+  }
 }
 
-variable "instance_type" {}
+variable "instance_type" {
+  type = string
+}
 
 variable "aws_instance_azs" {
     type = string

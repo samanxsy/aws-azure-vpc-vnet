@@ -50,7 +50,7 @@ resource "aws_route_table_association" "name" {
 
 # AWS Instance
 resource "aws_instance" "example_ec2" {
-  ami = var.ami-string
+  ami = var.image_id
   instance_type = var.instance_type
   availability_zone = var.aws_instance_azs
   subnet_id = aws_subnet.public.0.id
