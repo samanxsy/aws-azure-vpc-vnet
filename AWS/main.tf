@@ -12,7 +12,11 @@ module "ebs" {
 }
 
 module "vpc" {
-  source = "./modules/vpc"
+    source = "./modules/vpc"
+}
+
+module "security-group" {
+    source = "./modules/security-group"
 }
 
 resource "aws_volume_attachment" "volumex" {
