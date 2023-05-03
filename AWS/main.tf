@@ -26,12 +26,12 @@ module "vpc" {
 
 resource "aws_volume_attachment" "volume_attachment1" {
   device_name = var.volume_device_name
-  volume_id   = module.ebs.ebs_volume_id
+  volume_id   = module.ebs.ebs_volume_id_1
   instance_id = module.ec2-instance.instance1_id
 }
 
 resource "aws_volume_attachment" "volume_attachment2" {
   device_name = var.volume_device_name
-  volume_id   = module.ebs.ebs_volume_id
+  volume_id   = module.ebs.ebs_volume_id_2
   instance_id = module.ec2-instance.instance2_id
 }
