@@ -4,7 +4,7 @@ variable "aws_region" {
 }
 
 variable "volume_device_name" {
-  type = string
+  type    = string
   default = "/dev/sdf"
 }
 
