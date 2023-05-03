@@ -2,3 +2,5 @@
 *.tfstate.backup
 *.tfstate.*
 *.json
+*.terraform*
+*ec2key*
