@@ -1,3 +1,3 @@
-variable "aws_azs" {
-    default = "eu-central-1a"
+variable "ebs_azs" {
+  default = "eu-central-1a"
 }
