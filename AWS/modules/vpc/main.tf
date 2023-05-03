@@ -1,4 +1,46 @@
-# # VPC
+resource "aws_security_group" "ec2" {
+  name        = "ec2_sg"
+  description = "Allow traffic to EC2 instances"
+
+  vpc_id = aws_vpc.vpcx.id
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "load_balancer" {
+  name        = "LB_SG"
+  description = "Allow traffic to Load Balancer"
+
+  vpc_id = aws_vpc.vpcx.id
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# VPC
 resource "aws_vpc" "vpcx" {
   cidr_block = var.vpc_cidr
   tags = {
@@ -7,7 +49,7 @@ resource "aws_vpc" "vpcx" {
   }
 }
 
-# # Public Subnets
+# Public Subnets
 resource "aws_subnet" "public" {
   count             = length(var.subnet_cidr)
   vpc_id            = aws_vpc.vpcx.id
@@ -19,7 +61,7 @@ resource "aws_subnet" "public" {
   }
 }
 
-# # Internet GateWay
+# Internet GateWay
 resource "aws_internet_gateway" "Gatewayx" {
   vpc_id = aws_vpc.vpcx.id
   tags = {
@@ -28,7 +70,7 @@ resource "aws_internet_gateway" "Gatewayx" {
   }
 }
 
-# # RoutTable : Attach Internet GateWay
+# RoutTable : Attach Internet GateWay
 resource "aws_route_table" "route_tablex" {
   vpc_id = aws_vpc.vpcx.id
   route {
@@ -41,7 +83,7 @@ resource "aws_route_table" "route_tablex" {
   }
 }
 
-# # Route Table association with the Public Subnets
+# Route Table association with the Public Subnets
 resource "aws_route_table_association" "association" {
   count          = length(var.subnet_cidr)
   subnet_id      = element(aws_subnet.public.*.id, count.index)

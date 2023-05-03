@@ -24,8 +24,14 @@ module "vpc" {
   source = "./modules/vpc"
 }
 
-resource "aws_volume_attachment" "volumex" {
+resource "aws_volume_attachment" "volume_attachment1" {
   device_name = var.volume_device_name
   volume_id   = module.ebs.ebs_volume_id
-  instance_id = module.ec2-instance.instance_id
+  instance_id = module.ec2-instance.instance1_id
+}
+
+resource "aws_volume_attachment" "volume_attachment2" {
+  device_name = var.volume_device_name
+  volume_id   = module.ebs.ebs_volume_id
+  instance_id = module.ec2-instance.instance2_id
 }
