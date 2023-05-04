@@ -9,7 +9,16 @@ resource "aws_instance" "instancex1" {
   availability_zone           = var.aws_instance_azs
   subnet_id                   = var.aws_subnet_id
   associate_public_ip_address = true
+
   key_name                    = aws_key_pair.ssh_pair.key_name
+
+  connection {
+    type = "ssh"
+    user = "ubuntu"
+    private_key = file("./modules/ec2-instances/ec2")
+    host = self.public_ip
+  }
+
   tags = {
     Name  = "${var.aws_instance_name}-1"
     Group = "variablex"
@@ -22,7 +31,16 @@ resource "aws_instance" "instancex2" {
   availability_zone           = var.aws_instance_azs
   subnet_id                   = var.aws_subnet_id
   associate_public_ip_address = true
+
   key_name                    = aws_key_pair.ssh_pair.key_name
+
+  connection {
+    type = "ssh"
+    user = "ubuntu"
+    private_key = file("./modules/ec2-instances/ec2")
+    host = self.public_ip
+  }
+
   tags = {
     Name  = "${var.aws_instance_name}-2"
     Group = "variablex"
