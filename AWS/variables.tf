@@ -5,7 +5,7 @@ variable "aws_region" {
 
 variable "volume_device_name" {
   type    = string
-  default = "/dev/sdf"
+  default = "/dev/sda"
 }
 
 variable "aws_instance_name" {
