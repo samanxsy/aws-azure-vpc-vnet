@@ -19,27 +19,6 @@ resource "aws_security_group" "ec2" {
   }
 }
 
-resource "aws_security_group" "load_balancer" {
-  name        = "LB_SG"
-  description = "Allow traffic to Load Balancer"
-
-  vpc_id = aws_vpc.vpcx.id
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 # VPC
 resource "aws_vpc" "vpcx" {
   cidr_block = var.vpc_cidr
@@ -49,7 +28,7 @@ resource "aws_vpc" "vpcx" {
   }
 }
 
-# Public Subnets
+# Public Subnet
 resource "aws_subnet" "public" {
   count             = length(var.subnet_cidr)
   vpc_id            = aws_vpc.vpcx.id
