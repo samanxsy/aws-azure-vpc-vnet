@@ -4,3 +4,4 @@
 *.json
 *.terraform*
 *ec2key*
+*vmkey*
