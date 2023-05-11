@@ -27,6 +27,9 @@ resource "azurerm_virtual_machine" "jenkins_vm" {
   network_interface_ids = [azurerm_network_interface.jenkins_nic.id]
   vm_size               = "Standard_B1s"
 
+  delete_data_disks_on_termination = true
+  delete_os_disk_on_termination = true
+
   storage_os_disk {
     name              = "jenkins-osdisk"
     caching           = "ReadWrite"
