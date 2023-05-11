@@ -9,3 +9,7 @@ variable "resource_group_location" {
 variable "subnet_id" {
     type = string
 }
+
+variable "network_security_group_id" {
+    type = string
+}
