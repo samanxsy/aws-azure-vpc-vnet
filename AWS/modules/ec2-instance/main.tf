@@ -1,6 +1,6 @@
 resource "aws_key_pair" "ssh_pair" {
   key_name = "ec2key"
-  public_key = file("./modules/ec2-instance/ec2key.pub")
+  public_key = file("modules/ec2-instance/ec2key.pub")
 }
 
 resource "aws_instance" "instancex1" {
@@ -15,7 +15,7 @@ resource "aws_instance" "instancex1" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = file("./modules/ec2-instances/ec2")
+    private_key = file("modules/ec2-instances/ec2")
     host = self.public_ip
   }
 
