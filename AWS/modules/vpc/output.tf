@@ -9,7 +9,3 @@ output "vpc_id" {
 output "ec2_security_group_id" {
   value = aws_security_group.ec2.id
 }
-
-output "load_balancer_security_group_id" {
-  value = aws_security_group.load_balancer.id
-}
