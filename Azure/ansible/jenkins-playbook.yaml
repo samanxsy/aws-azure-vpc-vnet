@@ -1,6 +1,8 @@
 ---
-- hosts: all
+- name: jenkins-book
+  hosts: all
   become: yes
+
   tasks:
     - name: Update apt cache
       apt:
