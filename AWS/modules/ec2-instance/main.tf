@@ -15,8 +15,8 @@ resource "aws_instance" "instancex1" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = file("modules/ec2-instances/ec2key")
-    host = self.public_ip
+    private_key = file("modules/ec2-instance/ec2key")
+    host = aws_instance.instancex1.public_ip
   }
 
   tags = {
