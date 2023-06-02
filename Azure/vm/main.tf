@@ -59,6 +59,6 @@ resource "azurerm_virtual_machine" "vx_vm" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i '${azurerm_public_ip.vx_public_ip.ip_address},' ansible/jenkins-playbook.yaml --private-key=vm/vmkey"
+    command = "ansible-playbook -i '${azurerm_public_ip.vx_public_ip.ip_address},' -u vxadmin ansible/playbook.yml --private-key=vm/vmkey"
   }
 }

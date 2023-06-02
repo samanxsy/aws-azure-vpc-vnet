@@ -1,3 +1,9 @@
+# VPC
+
+data "external" "my_public_ip" {
+  program = ["bash", "modules/vpc/get_ip.sh"]
+}
+
 resource "aws_security_group" "ec2" {
   name        = "ec2_sg"
   description = "Allow traffic to EC2 instances"
@@ -8,7 +14,7 @@ resource "aws_security_group" "ec2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = data.external.my_public_ip.result["my_public_ip"]
   }
 
   egress {
@@ -77,7 +83,7 @@ resource "aws_network_acl" "acl" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "0.0.0.0/0"
+    cidr_block = data.external.my_public_ip.result["my_public_ip"]
     from_port  = 22
     to_port    = 22
   }

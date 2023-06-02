@@ -19,12 +19,16 @@ resource "aws_instance" "instancex1" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = file("modules/ec2-instance/ec2key.pem")
+    private_key = file("modules/ec2-instance/ec2key")
     host = aws_instance.instancex1.public_ip
   }
 
   tags = {
     Name  = "instancex"
     Group = "variablex"
+  }
+
+  metadata_options {
+    http_tokens = "required"
   }
 }

@@ -25,6 +25,10 @@ resource "azurerm_network_security_group" "vx_sg" {
   resource_group_name = azurerm_resource_group.vx_vm_rg.name
 }
 
+data "external" "my_public_ip" {
+  program = ["bash", "vnet/get_ip.sh"]
+}
+
 resource "azurerm_network_security_rule" "vx_security_rules_SSH" {
   name                        = "vx-security-rules-SSH"
   priority                    = 1001
@@ -33,7 +37,7 @@ resource "azurerm_network_security_rule" "vx_security_rules_SSH" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "22"
-  source_address_prefix       = "*"
+  source_address_prefix       = data.external.my_public_ip.result["my_public_ip"]
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.vx_vm_rg.name
   network_security_group_name = azurerm_network_security_group.vx_sg.name
@@ -46,8 +50,8 @@ resource "azurerm_network_security_rule" "vx_security_rules_HTTP" {
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
-  destination_port_range      = "8080"
-  source_address_prefix       = "*"
+  destination_port_range      = "8000"
+  source_address_prefix       = data.external.my_public_ip.result["my_public_ip"]
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.vx_vm_rg.name
   network_security_group_name = azurerm_network_security_group.vx_sg.name

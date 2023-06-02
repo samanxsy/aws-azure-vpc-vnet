@@ -13,12 +13,6 @@
         name: docker.io
         state: present
 
-    - name: Enable and start Docker service
-      systemd:
-        name: docker
-        enabled: yes
-        state: started
-
     - name: Install Docker Compose
       apt:
         name: docker-compose
