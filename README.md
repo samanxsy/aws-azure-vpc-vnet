@@ -1,6 +1,5 @@
 # Infrastructure as Code Repo
 
-[![Known Vulnerabilities](https://snyk.io/test/github/samanxsy/Terraform/badge.svg?style=flat-square)](https://snyk.io/test/github/samanxsy/Terraform)
 [![Terraform](https://img.shields.io/badge/Terraform-purple)](https://www.terraform.io/)
 [![Ansible](https://img.shields.io/badge/Ansible-red)](https://www.ansible.com/)
 [![Azure](https://img.shields.io/badge/Azure-blue)](https://azure.microsoft.com/en-us/)
