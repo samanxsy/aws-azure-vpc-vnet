@@ -6,7 +6,6 @@ on:
       - master
     paths-ignore:
       '**/README.md'
-on:
   push:
     branches:
       - master
@@ -38,8 +37,8 @@ jobs:
       - name: Validate Azure Configs
         working-directory: Azure
         run: |
-         terraform init
-         terraform validate
+          terraform init
+          terraform validate
 
       - name: Test Terraform Plan (Azure)
         working-directory: Azure
