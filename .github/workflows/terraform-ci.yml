@@ -1,0 +1,46 @@
+name: Terraform CI
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      '**/README.md'
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      '**/README.md'
+
+jobs:
+  terraform:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Validate AWS Configs
+        working-directory: AWS
+        run: |
+          terraform init
+          terraform validate
+
+      - name: Test Terraform Plan (AWS)
+        working-directory: AWS
+        run: terraform plan
+
+      - name: Validate Azure Configs
+        working-directory: Azure
+        run: |
+         terraform init
+         terraform validate
+
+      - name: Test Terraform Plan (Azure)
+        working-directory: Azure
+        run: terraform plan
