@@ -24,6 +24,9 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
+      - name: Create AWS credentials directory
+        run: mkdir -p ~/.aws
+
       - name: Configure AWS credentials
         run: |
           echo "[default]" > ~/.aws/credentials
