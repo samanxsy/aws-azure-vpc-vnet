@@ -24,6 +24,13 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
+      - name: Configure AWS credentials
+        run: |
+          echo "[default]" > ~/.aws/credentials
+          echo "access_key=${{ secrets.ACCESS_KEY }}" >> ~/.aws/credentials
+          echo "secret_access_key=${{ secrets.SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+
+
       - name: Validate AWS Configs
         working-directory: AWS
         run: |
