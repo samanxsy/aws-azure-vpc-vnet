@@ -27,8 +27,4 @@ resource "aws_instance" "instancex1" {
     Name  = "instancex"
     Group = "variablex"
   }
-
-  metadata_options {
-    http_tokens = "required"
-  }
 }
