@@ -1,3 +1,7 @@
+################################################################
+######################## EC2 INSTANCE ##########################
+################################################################
+
 resource "aws_key_pair" "ssh_pair" {
   key_name = "ec2key"
   public_key = file("modules/ec2-instance/ec2key.pub")
@@ -8,7 +12,9 @@ resource "aws_instance" "instancex1" {
   instance_type               = var.instance_type
   availability_zone           = var.aws_instance_azs
   subnet_id                   = var.aws_subnet_id
+  security_groups = [var.ec2_security_group]
   associate_public_ip_address = true
+
   root_block_device {
     volume_size = 50
     encrypted = true

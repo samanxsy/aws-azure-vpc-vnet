@@ -20,3 +20,7 @@ variable "aws_instance_name" {
 variable "aws_subnet_id" {
   type = string
 }
+
+variable "ec2_security_group" {
+  type = string
+}

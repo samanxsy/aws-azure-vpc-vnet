@@ -14,6 +14,7 @@ module "ec2-instance" {
   source            = "./modules/ec2-instance"
   aws_subnet_id     = module.vpc.subnet_id
   aws_instance_name = var.aws_instance_name
+  ec2_security_group = module.vpc.ec2_security_group
 }
 
 module "ebs" {

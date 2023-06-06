@@ -9,3 +9,7 @@ output "instance_public_ip1" {
 output "instance_state1" {
   value = aws_instance.instancex1.instance_state
 }
+
+output "ssh_key_name" {
+  value = aws_key_pair.ssh_pair.key_name
+}
