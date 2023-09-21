@@ -3,30 +3,30 @@
 # Main Terraform Config
 
 
-
+# Vnet
 resource "azurerm_virtual_network" "vx_vnet" {
-  name                = "vx-vnet"
+  name                = var.virtual_network_name
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
-  address_space       = ["10.0.0.0/16"]
+  address_space       = var.vnet_address_range
 }
 
-
+# Subnet
 resource "azurerm_subnet" "vx_subnet" {
-  name                 = "vx-subnet"
+  name                 = var.subnet_name
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vx_vnet.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = var.subnet_range
 }
 
-
+# Security Group
 resource "azurerm_network_security_group" "vx_sg" {
-  name                = "vx-sg"
+  name                = var.sg_name
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
 }
 
-
+# Inbbound Rule 1
 resource "azurerm_network_security_rule" "vx_security_rules_SSH" {
   name                        = "vx-security-rules-SSH"
   priority                    = 1001
@@ -35,12 +35,13 @@ resource "azurerm_network_security_rule" "vx_security_rules_SSH" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "22"
-  source_address_prefix       = data.external.my_public_ip.result["my_public_ip"]
+  source_address_prefix       = var.my_ip
   destination_address_prefix  = "*"
   resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.vx_sg.name
 }
 
+# Inbound Rule 2
 resource "azurerm_network_security_rule" "vx_security_rules_HTTP" {
   name                        = "vx-security-rules-HTTP"
   priority                    = 1002
@@ -48,13 +49,14 @@ resource "azurerm_network_security_rule" "vx_security_rules_HTTP" {
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
-  destination_port_range      = "8000"
-  source_address_prefix       = data.external.my_public_ip.result["my_public_ip"]
+  destination_port_range      = "80"
+  source_address_prefix       = var.my_ip
   destination_address_prefix  = "*"
   resource_group_name         = var.resource_group_name
   network_security_group_name = azurerm_network_security_group.vx_sg.name
 }
 
+# Outbound Rule
 resource "azurerm_network_security_rule" "vx_security_rules_outbound" {
   name                        = "vx-security-rules-outbound"
   priority                    = 1003
@@ -77,14 +79,14 @@ resource "azurerm_subnet_network_security_group_association" "vx_subnet_nsg" {
 
 
 # Network Interface
-resource "azurerm_network_interface" "vx_nic" {
+resource "azurerm_network_interface" "vx_network_interface" {
   name                = var.network_interface_name
-  resource_group_name = var.var.resource_group_name
-  location            = var.var.resource_group_location
+  resource_group_name = var.resource_group_name
+  location            = var.resource_group_location
 
   ip_configuration {
     name                          = var.ip_config_name
-    subnet_id                     = var.azurerm_subnet.vx_subnet.id
+    subnet_id                     = azurerm_subnet.vx_subnet.id
     private_ip_address_allocation = var.pv_ip_allocation_type
     public_ip_address_id          = azurerm_public_ip.vx_public_ip.id
   }
@@ -92,9 +94,9 @@ resource "azurerm_network_interface" "vx_nic" {
 
 
 resource "azurerm_public_ip" "vx_public_ip" {
-  name                = "vx-public-ip"
-  location            = var.var.resource_group_location
-  resource_group_name = var.var.resource_group_location
-  allocation_method   = "Dynamic"
-  sku                 = "Basic"
+  name                = var.public_ip_name
+  location            = var.resource_group_location
+  resource_group_name = var.resource_group_name
+  allocation_method   = var.public_ip_allocation_type
+  sku                 = var.public_ip_sku
 }

@@ -37,7 +37,7 @@ resource "azurerm_virtual_machine" "vx_vm" {
     disable_password_authentication = var.disable_password
     ssh_keys {
       path     = var.ssh_key_path
-      key_data = file("vm/vmkey.pub")
+      key_data = file("modules/virtual_machine/vmkey.pub")
     }
   }
 }
