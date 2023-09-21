@@ -1,6 +1,6 @@
 # Main Terraform Configs
 #
-# Project: Ephemeral AWS infrastructure for testing
+# Project: Ephemeral AWS infrastructure
 #
 # Author: Saman Saybani
 

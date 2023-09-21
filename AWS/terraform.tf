@@ -1,6 +1,6 @@
 # Terraform Configs for AWS infrastructure
 #
-# Project: My Portfolio Terminal
+# Project: Ephemeral Cloud Infrastructure
 #
 # Author: Saman Saybani
 
