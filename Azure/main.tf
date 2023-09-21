@@ -41,3 +41,8 @@ module "virtual_machine" {
 module "virtual_network" {
   source = "./virtual_network"
 }
+
+
+data "external" "my_public_ip" {
+  program = ["bash", "vnet/get_ip.sh"]
+}
