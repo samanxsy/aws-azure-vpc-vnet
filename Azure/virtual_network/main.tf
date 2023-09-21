@@ -1,3 +1,8 @@
+# Azure Virtual Network
+#
+# Main Terraform Config
+
+
 resource "azurerm_resource_group" "vx_vm_rg" {
   name     = "vx-vm-rg"
   location = var.location
@@ -73,6 +78,30 @@ resource "azurerm_network_security_rule" "vx_security_rules_outbound" {
 
 
 resource "azurerm_subnet_network_security_group_association" "vx_subnet_nsg" {
-  subnet_id = azurerm_subnet.vx_subnet.id
+  subnet_id                 = azurerm_subnet.vx_subnet.id
   network_security_group_id = azurerm_network_security_group.vx_sg.id
+}
+
+
+# Network Interface
+resource "azurerm_network_interface" "vx_nic" {
+  name                = var.network_interface_name
+  resource_group_name = var.azurerm_resource_group.vx_vm_rg.name
+  location            = var.azurerm_resource_group.vx_vm_rg.location
+
+  ip_configuration {
+    name                          = var.ip_config_name
+    subnet_id                     = var.azurerm_subnet.vx_subnet.id
+    private_ip_address_allocation = var.pv_ip_allocation_type
+    public_ip_address_id          = azurerm_public_ip.vx_public_ip.id
+  }
+}
+
+
+resource "azurerm_public_ip" "vx_public_ip" {
+  name                = "vx-public-ip"
+  location            = var.azurerm_resource_group.vx_vm_rg.location
+  resource_group_name = var.azurerm_resource_group.vx_vm_rg.location
+  allocation_method   = "Dynamic"
+  sku                 = "Basic"
 }

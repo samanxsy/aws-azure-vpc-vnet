@@ -1,3 +1,8 @@
+# Azure Virtual Network
+#
+# Outputs
+
+
 output "resource_group_name" {
   value = azurerm_resource_group.vx_vm_rg.name
 }
@@ -12,4 +17,8 @@ output "subnet_id" {
 
 output "network_security_group_id" {
   value = azurerm_network_security_group.vx_sg.id
+}
+
+output "network_interface_ids" {
+  value = azurerm_network_interface.vx_nic[*].id
 }
