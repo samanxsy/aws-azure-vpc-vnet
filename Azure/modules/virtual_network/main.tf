@@ -3,10 +3,6 @@
 # Main Terraform Config
 
 
-resource "azurerm_resource_group" "vx_vm_rg" {
-  name     = "vx-vm-rg"
-  location = var.location
-}
 
 resource "azurerm_virtual_network" "vx_vnet" {
   name                = "vx-vnet"
