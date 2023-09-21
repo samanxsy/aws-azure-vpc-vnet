@@ -146,8 +146,3 @@ variable "acl_egress_rules" {
     to_port    = number
   }))
 }
-
-
-
-
-
