@@ -6,21 +6,21 @@
 # Instance Info
 variable "machine_image" {
   description = "AMI for the instance"
-  type    = string
-  default = "ami-0ec7f9846da6b0f61"
+  type        = string
+  default     = "ami-0ec7f9846da6b0f61"
 }
 
 
 variable "instance_type" {
   description = "Istance Type"
-  type    = string
-  default = "t2.micro"
+  type        = string
+  default     = "t2.micro"
 }
 
 variable "public_ip_required" {
   description = "Define if the instance needs a Public IP or not"
-  type = bool
-  default = true 
+  type        = bool
+  default     = true
 }
 
 
@@ -42,36 +42,36 @@ variable "ec2_security_group" {
 # Instance Volume
 variable "root_block_volume_size" {
   description = "The size of the root block for the EC2 instance"
-  type = number
-  default = 50
+  type        = number
+  default     = 50
 }
 
 variable "encrypt_the_root_block" {
   description = "Encryption for the root block of the instance"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 
 # Instance Connection
 variable "instance_connection_type" {
-  type = string
+  type    = string
   default = "ssh"
 }
 
 variable "instance_username" {
-  type = string
+  type    = string
   default = "ubuntu"
 }
 
 variable "ssh_key_name" {
   description = "ssh key name"
-  type = string
+  type        = string
 }
 
 variable "instance_tags" {
   type = object({
     Name = string
-    Env = string
+    Env  = string
   })
 }

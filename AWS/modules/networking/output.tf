@@ -7,5 +7,5 @@ output "vpc_id" {
 }
 
 output "ec2_security_group" {
-  value = aws_security_group.ec2.id
+  value = aws_security_group.ec2_sg.id
 }
