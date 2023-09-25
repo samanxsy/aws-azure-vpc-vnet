@@ -163,7 +163,7 @@ resource "aws_volume_attachment" "volume_attachment1" {
 
 
 module "key_pair" {
-  source = "./modules/key_par"
+  source = "./modules/key_pair"
 }
 
 
