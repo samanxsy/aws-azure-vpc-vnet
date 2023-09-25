@@ -19,8 +19,6 @@ This repository contains Terraform configurations and modules for deploying clou
 - **Terraform Cloud Integration:** Terraform state is managed through Terraform Cloud, enabling version-controlled runs, improved secret management, and Policy as Code enforcement.
   
 - **Policy as Code with Sentinel:** Sentinel is enabled within Terraform Cloud workspaces to enforce specific policies.
-
-- **HashiCorp Vault:** Sensitive credentials, such as SSH keys, are securely stored and managed using HashiCorp Vault.
   
 - **Temporary Test Environments:** Quickly spin up and tear down cloud resources for testing purposes.
   
