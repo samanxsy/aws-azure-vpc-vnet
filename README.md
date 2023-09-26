@@ -18,8 +18,5 @@ This repository contains Terraform configurations and modules for deploying clou
   
 - **Terraform Cloud Integration:** Terraform state is managed through Terraform Cloud, enabling version-controlled runs, improved secret management, and Policy as Code enforcement.
   
-- **Policy as Code with Sentinel:** Sentinel is enabled within Terraform Cloud workspaces to enforce specific policies.
-  
 - **Temporary Test Environments:** Quickly spin up and tear down cloud resources for testing purposes.
   
-- **GitHub Actions Integration:** GitHub Actions workflows are used to automate configuration tests and monitor infrastructure changes for improved efficiency.
