@@ -44,7 +44,7 @@ resource "aws_security_group" "ec2_sg" {
     for_each = var.egress_rules
 
     content {
-      description = var.egress["description"]
+      description = egress.value["description"]
       from_port   = egress.value["from_port"]
       to_port     = egress.value["to_port"]
       protocol    = egress.value["protocol"]
@@ -87,12 +87,12 @@ resource "aws_network_acl" "acl" {
     for_each = var.acl_ingress_rules
 
     content {
-      protocol   = var.acl_ingress_rules["protocol"]
-      rule_no    = var.acl_ingress_rules["rule_no"]
-      action     = var.acl_ingress_rules["action"]
-      cidr_block = var.acl_ingress_rules["cidr_block"]
-      from_port  = var.acl_ingress_rules["from_port"]
-      to_port    = var.acl_ingress_rules["to_port"]
+      protocol   = ingress.value["protocol"]
+      rule_no    = ingress.value["rule_no"]
+      action     = ingress.value["action"]
+      cidr_block = ingress.value["cidr_block"]
+      from_port  = ingress.value["from_port"]
+      to_port    = ingress.value["to_port"]
     }
   }
 
@@ -100,12 +100,12 @@ resource "aws_network_acl" "acl" {
     for_each = var.acl_egress_rules
 
     content {
-      protocol   = var.acl_egress_rules["protocol"]
-      rule_no    = var.acl_egress_rules["rule_no"]
-      action     = var.acl_egress_rules["action"]
-      cidr_block = var.acl_egress_rules["cidr_block"]
-      from_port  = var.acl_egress_rules["from_port"]
-      to_port    = var.acl_egress_rules["to_port"]
+      protocol   = egress.value["protocol"]
+      rule_no    = egress.value["rule_no"]
+      action     = egress.value["action"]
+      cidr_block = egress.value["cidr_block"]
+      from_port  = egress.value["from_port"]
+      to_port    = egress.value["to_port"]
     }
   }
 }

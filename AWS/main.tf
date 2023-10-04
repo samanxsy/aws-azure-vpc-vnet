@@ -20,7 +20,7 @@ module "ec2_instance" {
   # Networking
   instance_az        = "eu-central-1a"
   subnet_id          = module.networking.subnet_id
-  ec2_security_group = module.networking.ec2_security_group
+  ec2_security_group = [ module.networking.ec2_security_group ]
 
   # Connection
   instance_connection_type = "ssh"
