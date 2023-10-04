@@ -79,9 +79,9 @@ module "networking" {
       cidr_blocks = [local.my_public_ip]
     },
     rule2 = {
-      description = "ALLOWING HTTP From self IP"
-      from_port   = 80
-      to_port     = 80
+      description = "ALLOWING SSH From self IP"
+      from_port   = 22
+      to_port     = 22
       protocol    = "tcp"
       cidr_blocks = [local.my_public_ip]
     }
