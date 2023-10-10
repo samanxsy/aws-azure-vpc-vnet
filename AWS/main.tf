@@ -33,6 +33,7 @@ module "ec2_instance" {
   }
 }
 
+# EBS
 module "ebs" {
   source = "./modules/ebs"
 
@@ -46,6 +47,7 @@ module "ebs" {
   }
 }
 
+# Vol Attach
 resource "aws_volume_attachment" "volume_attachment1" {
   device_name = "/dev/sda"
   volume_id   = module.ebs.ebs_volume_id
@@ -73,6 +75,7 @@ data "aws_subnet" "frankfurt_public_subnet_1" {
   }
 }
 
+# Security Group Data
 data "aws_security_group" "default_sg" {
   filter {
     name   = "tag:Name"
